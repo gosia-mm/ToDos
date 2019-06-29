@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:ToDos"
+             xmlns:converters="clr-namespace:ToDos.Converters"
+             x:Class="ToDos.MainPage">
+    <ContentPage.Resources>
+        <converters:FontSizer x:Key="fontSizer"/>
+        <Style TargetType="ListView">
+            <Setter Property="BackgroundColor" Value="{StaticResource BackgroundAndroid}"/>
+        </Style>
+    </ContentPage.Resources>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness">
+            <OnPlatform.Platforms>
+                <On Platform="Android" Value="0, 20, 0, 0"/>
+                <On Platform="UWP" Value="0, 10, 0, 0"/>
+            </OnPlatform.Platforms>
+        </OnPlatform>
+    </ContentPage.Padding>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+" Clicked="AddToDo_Clicked" />
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ListView x:Name="lvToDos" Margin="30" ItemSelected="LvToDos_ItemSelected" IsGroupingEnabled="True" GroupDisplayBinding="{Binding Title}" GroupShortNameBinding="{Binding ShortTitle}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Image Source="{Binding Image}" HeightRequest="50"/>
+                            <BoxView Color="Navy" WidthRequest="50" HeightRequest="50"/>
+                            <Label Text="{Binding Title}" FontSize="{Binding Value, Source={x:Reference slider}, Converter={StaticResource fontSizer}, ConverterParameter = 1 }"></Label>
+                            <Label Text="{Binding Description}" FontSize="{Binding Value, Source={x:Reference slider}, Converter={StaticResource fontSizer}, ConverterParameter = 0.8}"></Label>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Slider x:Name="slider" Maximum="100"></Slider>
+    </StackLayout>
+</ContentPage>

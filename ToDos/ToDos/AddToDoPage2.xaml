@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ToDos.AddToDoPage2">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Picker SelectedItem="{Binding Category}">
+                    <Picker.Items>
+                        <x:String>Studia</x:String>
+                        <x:String>Praca</x:String>
+                        <x:String>Osobiste</x:String>
+                        <x:String>Inne</x:String>
+                    </Picker.Items>
+                </Picker>
+                <Editor Placeholder="To do title" x:Name="titleEdit" Text="{Binding Title}" HeightRequest="100" />
+                <Editor Placeholder="To do description" x:Name="descEdit" Text="{Binding Description}" HeightRequest="100" />
+                <StackLayout>
+                    <Image x:Name="imgTodo" Source="Assets/pobrane.jpg" HeightRequest="300" WidthRequest="250"/>
+                    <Editor Placeholder="Enter image name" Text="{Binding Image}"/>
+                    <Button x:Name="btnChooseImg" Clicked="BtnChooseImg_Clicked" Text="Choose image"/>
+                </StackLayout>
+                <Button Text="Dodaj" Clicked="Button_Clicked"/>
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>
